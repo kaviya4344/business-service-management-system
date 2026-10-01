@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <div><h1>Customer Management</h1><p>Manage registered customers.</p></div>
+    <a href="{{ url_for('add_customer') }}" class="btn">+ Add Customer</a>
+</div>
+
+<div class="table-card">
+<table>
+    <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for customer in customers %}
+    <tr>
+        <td>{{ customer.id }}</td><td>{{ customer.name }}</td><td>{{ customer.email }}</td>
+        <td>{{ customer.phone }}</td><td>{{ customer.address }}</td>
+        <td><a class="danger-link" href="{{ url_for('delete_customer', id=customer.id) }}" onclick="return confirm('Delete this customer?')">Delete</a></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="empty">No customers found.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

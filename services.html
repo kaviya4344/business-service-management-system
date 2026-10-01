@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <div><h1>Service Management</h1><p>Manage business services.</p></div>
+    <a href="{{ url_for('add_service') }}" class="btn">+ Add Service</a>
+</div>
+
+<div class="table-card">
+<table>
+    <thead><tr><th>ID</th><th>Service</th><th>Description</th><th>Price</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for service in services %}
+    <tr>
+        <td>{{ service.id }}</td><td>{{ service.service_name }}</td><td>{{ service.description }}</td>
+        <td>₹{{ "%.2f"|format(service.price) }}</td>
+        <td><a class="danger-link" href="{{ url_for('delete_service', id=service.id) }}" onclick="return confirm('Delete this service?')">Delete</a></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" class="empty">No services found.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

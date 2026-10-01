@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard">
+    <div class="dashboard-header">
+        <div>
+            <h1>VEDA Dashboard</h1>
+            <p>Welcome, {{ session.get('username') }}</p>
+        </div>
+        <a href="{{ url_for('logout') }}" class="btn logout-btn">Logout</a>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-card"><div class="stat-icon">👥</div><h3>Total Customers</h3><p class="stat-number">{{ customer_count }}</p><a href="{{ url_for('customers') }}">View Customers</a></div>
+        <div class="stat-card"><div class="stat-icon">🛠️</div><h3>Total Services</h3><p class="stat-number">{{ service_count }}</p><a href="{{ url_for('services') }}">View Services</a></div>
+        <div class="stat-card"><div class="stat-icon">📋</div><h3>Service Requests</h3><p class="stat-number">{{ request_count }}</p><a href="{{ url_for('service_requests') }}">View Requests</a></div>
+        <div class="stat-card"><div class="stat-icon">⏳</div><h3>Pending Requests</h3><p class="stat-number">{{ pending_count }}</p><a href="{{ url_for('service_requests') }}">Check Requests</a></div>
+    </div>
+
+    <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-container">
+            <a href="{{ url_for('add_customer') }}" class="action-card"><span>➕</span><h3>Add Customer</h3><p>Register a new customer</p></a>
+            <a href="{{ url_for('add_service') }}" class="action-card"><span>🛠️</span><h3>Add Service</h3><p>Add a new business service</p></a>
+            <a href="{{ url_for('add_request') }}" class="action-card"><span>📝</span><h3>New Request</h3><p>Create a customer request</p></a>
+        </div>
+    </section>
+
+    <section class="system-info">
+        <h2>About VEDA</h2>
+        <p>VEDA helps organizations manage customers, services and service requests through a centralized web application.</p>
+        <p>Technology: Python Flask, HTML, CSS and SQLite.</p>
+    </section>
+</div>
+{% endblock %}

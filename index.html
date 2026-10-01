@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to VEDA</h1>
+        <h2>Technology of Business and Service Management System</h2>
+        <p>Manage customers, business services and service requests efficiently through one centralized system.</p>
+        {% if session.get('username') %}
+            <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn">Admin Login</a>
+        {% endif %}
+    </div>
+</section>
+
+<section class="features">
+    <h2>Our System Features</h2>
+    <div class="feature-container">
+        <div class="feature-card"><h3>👥 Customer Management</h3><p>Add, view and manage customer information.</p></div>
+        <div class="feature-card"><h3>🛠️ Service Management</h3><p>Manage services and pricing details.</p></div>
+        <div class="feature-card"><h3>📋 Service Requests</h3><p>Create and track customer requests.</p></div>
+        <div class="feature-card"><h3>📊 Business Dashboard</h3><p>View important business statistics.</p></div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <div><h1>Service Requests</h1><p>Track and update customer requests.</p></div>
+    <a href="{{ url_for('add_request') }}" class="btn">+ New Request</a>
+</div>
+
+<div class="table-card">
+<table>
+    <thead><tr><th>ID</th><th>Customer</th><th>Service</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for item in requests %}
+    <tr>
+        <td>{{ item.id }}</td><td>{{ item.customer_name }}</td><td>{{ item.service_name }}</td>
+        <td>{{ item.request_date }}</td>
+        <td><span class="status {{ item.status|lower|replace(' ', '-') }}">{{ item.status }}</span></td>
+        <td class="actions">
+            <a href="{{ url_for('update_request', id=item.id, status='Pending') }}">Pending</a>
+            <a href="{{ url_for('update_request', id=item.id, status='In Progress') }}">In Progress</a>
+            <a href="{{ url_for('update_request', id=item.id, status='Completed') }}">Completed</a>
+            <a href="{{ url_for('update_request', id=item.id, status='Cancelled') }}">Cancel</a>
+            <a class="danger-link" href="{{ url_for('delete_request', id=item.id) }}" onclick="return confirm('Delete this request?')">Delete</a>
+        </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="empty">No service requests found.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
